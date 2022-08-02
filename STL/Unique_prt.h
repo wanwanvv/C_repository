@@ -4,7 +4,7 @@
  * @Author: wanwanvv
  * @Date: 2022-07-29 11:27:37
  * @LastEditors: wanwanvv
- * @LastEditTime: 2022-07-29 11:59:16
+ * @LastEditTime: 2022-08-02 15:57:04
  */
 #ifndef UNIQUE_PTR
 #define UNIQUE_PTR
@@ -51,7 +51,7 @@ public:
 
     //提供一个本类型到bool的隐式转换，不允许使用参数
     operator bool()const noexcept{
-        return m_ptr;
+        return ptr_;
     }
 
 private:
