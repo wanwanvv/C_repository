@@ -4,7 +4,7 @@
  * @Author: wanwanvv
  * @Date: 2022-07-20 14:28:30
  * @LastEditors: wanwanvv
- * @LastEditTime: 2022-07-20 16:10:30
+ * @LastEditTime: 2022-09-03 19:39:48
  */
 #ifndef MY_THREAD_H
 #define MY_THREAD_H
@@ -18,22 +18,7 @@
 
 class My_thread{
 public:
-    My_thread():isStop_(false),isPause_(false),thread_(nullptr),num_(0){
-
-    }
-
-    ~My_thread(){
-        stop();
-    }
-
-    //禁止拷贝和赋值
-    My_thread& operator=(const My_thread&)=delete;
-    My_thread& operator=(My_thread&&)=delete;
-    My_thread(const My_thread&)=delete;
-    My_thread(My_thread&&)=delete;
-
-    //接口函数
-    void run(){
+    My_thread():isStop_(false),isPause_(true),thread_(nullptr),num_(0){
         thread_=std::make_shared<std::thread>(
             [&](){
                 for(;;){
@@ -47,6 +32,21 @@ public:
                 }
             }
         );
+    }
+
+    ~My_thread(){
+        stop();
+    }
+
+    //禁止拷贝和赋值
+    My_thread& operator=(const My_thread&)=delete;
+    My_thread& operator=(My_thread&&)=delete;
+    My_thread(const My_thread&)=delete;
+    My_thread(My_thread&&)=delete;
+
+    //接口函数
+    void start(){
+        
     }
 
     void pause(){

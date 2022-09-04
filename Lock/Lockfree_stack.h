@@ -4,7 +4,7 @@
  * @Author: wanwanvv
  * @Date: 2022-07-17 16:00:41
  * @LastEditors: wanwanvv
- * @LastEditTime: 2022-07-29 16:02:32
+ * @LastEditTime: 2022-09-03 20:54:02
  */
 
 #ifndef LOCK_FREE_H
@@ -17,7 +17,7 @@
 //如果相等那么就将pAddr的值改为nNew并同时返回true；否则就返回false，什么都不做
 bool my_compare_and_swap(int* pAddr, int nExpected, int nNew){
     if(*pAddr==nExpected){
-        *pAddr=nExpected;
+        *pAddr=nNew;
         return true;
     }else{
         return false;
@@ -59,9 +59,8 @@ public:
 
     void pop(){
         Node<T>* old_head=head.load();
-        if(!old_head) return;
-        while(!std::atomic_compare_exchange_weak(&head,&old_head,old_head->next));
-        delete old_head;
+        while(!old_head&&!std::atomic_compare_exchange_weak(&head,&old_head,old_head->next));
+        if(old_head!=nullptr) delete old_head;
     }
 
     bool isEmpty(){

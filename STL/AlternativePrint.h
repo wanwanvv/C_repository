@@ -3,8 +3,8 @@
  * @version: 
  * @Author: wanjingyi
  * @Date: 2022-08-10 08:59:50
- * @LastEditors: sueRimn
- * @LastEditTime: 2022-08-12 08:56:34
+ * @LastEditors: wanwanvv
+ * @LastEditTime: 2022-09-03 21:11:47
  */
 #ifndef ALTERNATIVE_PRINT_H
 #define ALTERNATIVE_PRINT_H
@@ -91,13 +91,13 @@ private:
 class AlternativePrint_atomic{
 public:
 
-    AlternativePrint_atomic(int num):n(num),flag(ATOMIC_FLAG_INIT){
+    AlternativePrint_atomic(int num):n(num),flag(ATOMIC_FLAG_INIT){ 
 
     }
 
     void foo(){
         for(int i=0;i<n;++i){
-            while(flag.test_and_set(std::memory_order_acquire)){
+            while(!flag.test_and_set(std::memory_order_acquire)){
                 std::this_thread::yield();
             }
             std::cout<<"foo";
@@ -108,7 +108,7 @@ public:
     void bar(){
         for(int i=0;i<n;++i){
             while(flag.test_and_set(std::memory_order_acquire)){
-
+                std::this_thread::yield();
             }
             std::cout<<"bar ";
             flag.clear(std::memory_order_release);

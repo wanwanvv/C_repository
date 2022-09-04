@@ -4,7 +4,7 @@
  * @Author: wanwanvv
  * @Date: 2022-07-06 11:09:34
  * @LastEditors: wanwanvv
- * @LastEditTime: 2022-07-25 11:39:15
+ * @LastEditTime: 2022-08-26 09:26:40
  */
 /*
  * @Descripttion: 
@@ -22,8 +22,42 @@
 #include "ThreadPool/My_thread.h"
 #include "ThreadPool/ProducerConsumer.h"
 #include "STL/HashTable.h"
+#include "STL/MyString.h"
 
 using namespace std;
+
+void testMyString()
+{
+    MyString s1("wmm");
+    MyString s2(s1);
+    MyString s3;
+    s3 = s2;
+    cout << s1 << endl;
+    cout << s2 << endl;
+    cout << s3 << endl;
+    cout << (s1 > s2) << endl;
+    cout << (s1 == s2) << endl;
+    //cin >> s3;
+    //cout << "输入后s3：" << s3 << endl;
+    s2.push_back('c');
+    //s2.pop_back();
+    s2.erase(0, 1);
+    cout << s2 << endl;
+    MyString s4("hello world");
+    s4.erase(0, 3);
+    s4 += "cyq";
+    cout << s4 << endl;
+    s4.insert(2, "wmm");
+    cout << s4 << endl;
+    cout << s4.find("world") << endl;
+    MyString::iterator it = s4.begin();
+    while (it != s4.end())
+    {
+        cout << *it << " ";
+        it++;
+    }
+    cout << endl;
+}
 
 void TestRotateR()
 {

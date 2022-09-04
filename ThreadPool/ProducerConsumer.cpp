@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: wanwanvv
+ * @Date: 2022-07-23 14:48:30
+ * @LastEditors: wanwanvv
+ * @LastEditTime: 2022-09-03 20:06:20
+ */
 #include "./ProducerConsumer.h"
 
 int SingleProducerConsumer::cnt_=0;
@@ -30,6 +38,7 @@ int SingleProducerConsumer::consumeItem(){
 
 void SingleProducerConsumer::produceTask(){
     for(int i=0;i<producerSize_;++i){
+        produceItem(i);
          std::cout << "Produce the " << i << "^th item..." << std::endl;
     }
 }
